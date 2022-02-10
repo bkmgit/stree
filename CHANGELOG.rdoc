@@ -4,3 +4,8 @@
 
   * Birthday!
 
+=== 1.0.1 / 2020-02-10
+
+* 1 Follow RubyGem Tutorial Style
+
+  * https://guides.rubygems.org/gems-with-extensions/

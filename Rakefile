@@ -1,23 +1,13 @@
-# -*- ruby -*-
+require 'rake/testtask'
+require 'rake/extensiontask'
 
-require 'rubygems'
-require 'hoe'
-
-HOE = Hoe.spec 'stree' do
-  developer('Aaron Patterson', 'aaron@tenderlovemaking.com')
-  self.readme_file   = 'README.rdoc'
-  self.history_file  = 'CHANGELOG.rdoc'
-  self.extra_rdoc_files  = FileList['*.rdoc']
-  self.extra_dev_deps << ['rake-compiler', '>= 0']
-  self.spec_extras = { :extensions => ["ext/stree/extconf.rb"] }
+Rake::ExtensionTask.new "stree" do |ext|
+  ext.lib_dir = "lib/stree"
 end
 
-require "rake/extensiontask"
-
-Rake::ExtensionTask.new(HOE.name, HOE.spec) do |ext|
-  ext.lib_dir = File.join('lib', 'stree')
+Rake::TestTask.new do |t|
+  t.libs << 'test'
 end
 
-Rake::Task[:test].prerequisites << :compile
-
-# vim: syntax=ruby
+desc "Run tests"
+task :default => :test
